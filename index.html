@@ -1,7 +1,7 @@
 
 <html>
 	<head>
-		<title>iTunes - Music Search in javascript</title>
+		<title>My Musaic</title>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> 
 		
 		<style type="text/css">
@@ -82,15 +82,17 @@
 					results[i] = obj;
 
 					//html += '<div class="songs-search-result">';
-					//html +='<div style="font-family: verdana;">
+					html += "<h3 style='margin-left: 30%;'>My Musaic</h3><br>";
+					html += "<img src='images/Music icon.png' style='width:15%; margin-top:-3%; margin-left:30%; margin-bottom:10%;'/>";
+					html += "<h3 style='font-family: arial; margin-left:0%; color:skyblue;'>Music :</h3>";
 					html += '<span class="label">Track:</span>{0}&nbsp;&nbsp;'.replace("{0}", obj.track_name);
 					html += '<a href="{0}" target="_blank">Preview</a>&nbsp;&nbsp;'.replace("{0}", item.previewUrl);
 					html += '<a href="{0}" target="_blank">Full Song</a>&nbsp;&nbsp;'.replace("{0}", obj.track_url);
-					html += '<span class="label">Track Price:</span>{0} {1}<br />'.replace("{0}", item.trackPrice).replace("{1}", item.currency);
-					html += '<span class="label">Artist:</span><a href="{0}" target="_blank">{1}</a><br />'.replace("{0}", obj.artist_url).replace("{1}", obj.artist_name);
-					html += '<span class="label">Collection:</span><a href="{0}" target="_blank">{1}</a><br />'.replace("{0}", obj.collection_url).replace("{1}", obj.collection_name);
-					html += '<span class="label">Collection Price:</span>{0} {1}<br />'.replace("{0}", item.collectionPrice).replace("{1}", item.currency);
-					html += '<span class="label">Primary Genre:</span>{0}<br />'.replace("{0}", obj.genre);
+					//html += '<span class="label">Track Price:</span>{0} {1}<br />'.replace("{0}", item.trackPrice).replace("{1}", item.currency);
+					html += '<br><br><span class="label">Artist:</span><a href="{0}" target="_blank">{1}</a><br />'.replace("{0}", obj.artist_url).replace("{1}", obj.artist_name);
+					html += '<br><span class="label">Collection:</span><a href="{0}" target="_blank">{1}</a><br />'.replace("{0}", obj.collection_url).replace("{1}", obj.collection_name);
+					//html += '<span class="label">Collection Price:</span>{0} {1}<br />'.replace("{0}", item.collectionPrice).replace("{1}", item.currency);
+					html += '<br><span class="label">Primary Genre:</span>{0}<br />'.replace("{0}", obj.genre);
 
 					//html += '</div>';
 				}
@@ -133,7 +135,9 @@
 	
 	<!--input type="text" id="search-video" title="Enter Search Keyword" />
 	<input type="button" value="Submit" onclick="performVideo();" /-->
+	
 	<div id="vid" style="margin-top:100px;margin-left:200px;width:75%;border:1px solid;border-radious:5px;"></div>
+	
 <!--div class="vzaar_media_player" id="vid">
 <object data="https://view.vzaar.com/1975731/flashplayer" height="252" id="vzvd-1975731" type="application/x-shockwave-flash" width="448">
 <param name="flashvars" value="border=none" />
@@ -150,7 +154,7 @@
 		<br />
 		<input type="button" value="Perform iTunes Search" onclick="performSearch();" /-->
 		
-		<div id="itunes-results" style="margin-left:660px;margin-top:-10%; font-family: verdana;">
+		<div id="itunes-results" style="margin-left:660px;margin-top:-32%; font-family: sans-serif;">
 		</div>
 	   <!--/div-->
 	</body>
