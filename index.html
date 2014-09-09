@@ -1,79 +1,157 @@
-<!DOCTYPE html>
+
 <html>
+	<head>
+		<title>iTunes - Music Search in javascript</title>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> 
+		
+		<style type="text/css">
+		.songs-search-result {
+			border: 1px solid Gray;
+			margin-bottom: 5px;
+			padding: 5px;
+		}
 
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Itunes : test">
+		.songs-search-result  .label{
+			display: inline-block;
+			width: 200px;
+		}
+		</style>
+		
+		<script type="text/javascript">
+			
+			var pathname = window.location.search.substring(1);
+			//alert(pathname);
+			
+			var id = pathname.split('&');
+			
+			var vId = id[0].split('=');
+			var sName = id[1].split('=');
+			
+			var videoId = vId[1];
+			var songName = sName[1];
+			//alert(videoId);
+			//alert(songName);
+			
+			
+			
+			function urlEncode(obj) {
+				var s = '';
+				for (var key in obj) {
+					s += encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]) + '&';
+				}
+				if (s.length > 0) {
+					s = s.substr(0, s.length - 1);
+				}
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+				return (s);
+			}
+			
+			function performSearch() {
+				var params = {
+					term: encodeURIComponent(songName),
+					country: 'US',
+					media: 'music',
+					entity: 'musicTrack',
+					//attribute: 'artistTerm,albumTerm,songTerm,musicTrackTerm',
+					limit: 1,
+					callback: 'handleTunesSearchResults'
+				};
+				var params = urlEncode(params);
+				//alert(params);
+				var url = 'http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/wa/wsSearch?' + params;
+				var html = '<script src="' + url + '"><\/script>';
+				jQuery('head').append(html);
+			}
 
-    <title>Itunes</title>
-  </head>
+			function handleTunesSearchResults(arg) {
+				var results = arg.results;
+				var html = '';
+				for (var i = 0; i < results.length; i++) {
+					var item = results[i];
+					var obj = {
+						source: 0,
+						track_id: item.trackId,
+						track_name: item.trackCensoredName,
+						track_url: item.trackViewUrl,
+						artist_name: item.artistName,
+						artist_url: item.artistViewUrl,
+						collection_name: item.collectionCensoredName,
+						collection_url: item.collectionViewUrl,
+						genre: item.primaryGenreName
+					};
+					results[i] = obj;
 
-  <body>
+					//html += '<div class="songs-search-result">';
+					//html +='<div style="font-family: verdana;">
+					html += '<span class="label">Track:</span>{0}&nbsp;&nbsp;'.replace("{0}", obj.track_name);
+					html += '<a href="{0}" target="_blank">Preview</a>&nbsp;&nbsp;'.replace("{0}", item.previewUrl);
+					html += '<a href="{0}" target="_blank">Full Song</a>&nbsp;&nbsp;'.replace("{0}", obj.track_url);
+					html += '<span class="label">Track Price:</span>{0} {1}<br />'.replace("{0}", item.trackPrice).replace("{1}", item.currency);
+					html += '<span class="label">Artist:</span><a href="{0}" target="_blank">{1}</a><br />'.replace("{0}", obj.artist_url).replace("{1}", obj.artist_name);
+					html += '<span class="label">Collection:</span><a href="{0}" target="_blank">{1}</a><br />'.replace("{0}", obj.collection_url).replace("{1}", obj.collection_name);
+					html += '<span class="label">Collection Price:</span>{0} {1}<br />'.replace("{0}", item.collectionPrice).replace("{1}", item.currency);
+					html += '<span class="label">Primary Genre:</span>{0}<br />'.replace("{0}", obj.genre);
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/ramudu-63/itunes">View on GitHub</a>
+					//html += '</div>';
+				}
+				jQuery('#itunes-results').html(html);
+				performVideo();
+			};
+			function performVideo()
+			{
+				
+				//alert("hi");
+				//var videoId = $('#search-video').val();
+				//alert(videoId);
+				
+				var url="http://view.vzaar.com/"+videoId+"/video";
+				//alert(url);
+					
+				var video = "<div class='vzaar_media_player'><object data='https://view.vzaar.com/"+videoId+"/flashplayer' height='452' id='vzvd-"+videoId+"' type='application/x-shockwave-flash' width='448'><param name='flashvars' value='border=none' /><param name='allowScriptAccess' value='always' /><param name='wmode' value='transparent' /><param name='movie' value='https://view.vzaar.com/"+videoId+"/flashplayer' /><param name='allowFullScreen' value='true' /><video controls height='452' id='vzvid' onclick='this.play();' poster='https://view.vzaar.com/"+videoId+"/image' preload='none'src='https://view.vzaar.com/"+videoId+"/video' width='448'></video></object></div>";
+				//alert(video);
+				$("#vid").append(video);
 
-          <h1 id="project_title">Itunes</h1>
-          <h2 id="project_tagline">test</h2>
+			//var request = new XMLHttpRequest();
+				//request.onreadystatechange = function() {
+				//if (request.readyState === 4) {
+//					if (request.status === 200) {
+//						document.body.className = 'ok';
+	//				} else {	
+		//			document.body.className = 'error';
+			//		}
+				//}
+			//};
+//	request.open("GET", url , true);
+	//request.send(null);
+				
+				
+			}
+		</script>
+	</head>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/ramudu-63/itunes/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/ramudu-63/itunes/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Itunes maintained by <a href="https://github.com/ramudu-63">ramudu-63</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
+	<body onload="performSearch()">
+	
+	<!--input type="text" id="search-video" title="Enter Search Keyword" />
+	<input type="button" value="Submit" onclick="performVideo();" /-->
+	<div id="vid" style="margin-top:100px;margin-left:200px;width:75%;border:1px solid;border-radious:5px;"></div>
+<!--div class="vzaar_media_player" id="vid">
+<object data="https://view.vzaar.com/1975731/flashplayer" height="252" id="vzvd-1975731" type="application/x-shockwave-flash" width="448">
+<param name="flashvars" value="border=none" />
+<param name="allowScriptAccess" value="always" />
+<param name="wmode" value="transparent" />
+<param name="movie" value="https://view.vzaar.com/1975731/flashplayer" />
+<param name="allowFullScreen" value="true" />
+<video controls height="252" id="vzvid" onclick="this.play();" poster="https://view.vzaar.com/1975731/image" preload="none" src="https://view.vzaar.com/1975731/video" width="448"></video>
+</object>
+</div>
+       <div style="float:left">
+		Please enter a search term below (e.g. Michael):<br />
+		<input type="text" id="search-keyword" title="Enter Search Keyword" />
+		<br />
+		<input type="button" value="Perform iTunes Search" onclick="performSearch();" /-->
+		
+		<div id="itunes-results" style="margin-left:660px;margin-top:-10%; font-family: verdana;">
+		</div>
+	   <!--/div-->
+	</body>
 </html>
