@@ -62,10 +62,19 @@
 				var html = '<script src="' + url + '"><\/script>';
 				jQuery('head').append(html);
 			}
-
+			
 			function handleTunesSearchResults(arg) {
 				var results = arg.results;
 				var html = '';
+					html += "<h3 style='margin-left: 30%;'>My Musaic</h3><br>";
+					html += "<img src='image/Music icon.png' style='width:15%; margin-top:-3%; margin-left:30%; margin-bottom:10%;'/>";
+					html += "<h3 style='font-family: arial; margin-left:0%; color:skyblue;'>Music :</h3>";
+					
+					if(results.length == 0)
+					{
+						html +="<p style='color:red;'>song details are not available</p>";
+					}
+				else{
 				for (var i = 0; i < results.length; i++) {
 					var item = results[i];
 					var obj = {
@@ -82,9 +91,9 @@
 					results[i] = obj;
 
 					//html += '<div class="songs-search-result">';
-					html += "<h3 style='margin-left: 30%;'>My Musaic</h3><br>";
-					html += "<img src='images/Music icon.png' style='width:15%; margin-top:-3%; margin-left:30%; margin-bottom:10%;'/>";
-					html += "<h3 style='font-family: arial; margin-left:0%; color:skyblue;'>Music :</h3>";
+					
+				
+					
 					html += '<span class="label">Track:</span>{0}&nbsp;&nbsp;'.replace("{0}", obj.track_name);
 					html += '<a href="{0}" target="_blank">Preview</a>&nbsp;&nbsp;'.replace("{0}", item.previewUrl);
 					html += '<a href="{0}" target="_blank">Full Song</a>&nbsp;&nbsp;'.replace("{0}", obj.track_url);
@@ -95,6 +104,7 @@
 					html += '<br><span class="label">Primary Genre:</span>{0}<br />'.replace("{0}", obj.genre);
 
 					//html += '</div>';
+				}
 				}
 				jQuery('#itunes-results').html(html);
 				performVideo();
@@ -153,7 +163,7 @@
 		<input type="text" id="search-keyword" title="Enter Search Keyword" />
 		<br />
 		<input type="button" value="Perform iTunes Search" onclick="performSearch();" /-->
-		
+		<div id="songdetails">
 		<div id="itunes-results" style="margin-left:660px;margin-top:-32%; font-family: sans-serif;">
 		</div>
 	   <!--/div-->
