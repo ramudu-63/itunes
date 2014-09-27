@@ -11,9 +11,11 @@
          * Supported social sites
          * @type {Object}
          */
+		 
         var _sites = {
                 facebook: {
-                    url: 'https://www.facebook.com/sharer/sharer.php?s=1937248959746741&p[title]={{title}}&p[summary]={{description}}&p[url]={{url}}&p[images][0]={{media}}',
+                    url: 'https://www.facebook.com/sharer/sharer.php?s=100&p[title]={{title}}&p[summary]={{description}}&p[url]={{url}}&p[images][0]={{media}}',
+					verticalAlign: true,
                     popup: {
                         width: 600,
                         height: 600
@@ -21,6 +23,7 @@
                 },
                 twitter: {
                     url: 'https://twitter.com/share?url={{url}}&via={{via}}&text={{description}}',
+					verticalAlign: true,
                     popup: {
                         width: 685,
                         height: 600
