@@ -13,7 +13,7 @@
          */
         var _sites = {
                 facebook: {
-                    url: 'https://www.facebook.com/sharer/sharer.php?s=1937248959746741&p[title]={{title}}&p[summary]={{description}}&p[url]={{url}}&p[images][0]={{media}}',
+                    url: 'https://www.facebook.com/sharer/sharer.php?appId=1937248959746741&p[title]={{title}}&p[summary]={{description}}&p[url]={{url}}&p[images][0]={{media}}',
                     popup: {
                         width: 600,
                         height: 600
