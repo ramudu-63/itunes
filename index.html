@@ -1,16 +1,8 @@
-<!DOCTYPE html>
+
 <html>
-  <head>
-    <title>My Musaic</title>
-    <link rel="stylesheet" href="social-buttons-share.css">
-	
-    
-  </head>
-  <body style="margin-top:5%">
-    
-    
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> 
+	<head>
+		<title>My Musaic</title>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> 
 		
 		<style type="text/css">
 		.songs-search-result {
@@ -75,7 +67,7 @@
 				var results = arg.results;
 				var html = '';
 					html += "<h3 style='margin-left: 30%;'>My Musaic</h3><br>";
-					html += "<img src='share-demo/image/Music icon.png' style='width:15%; margin-top:-3%; margin-left:30%; margin-bottom:10%;'/>";
+					html += "<img src='image/Music icon.png' style='width:15%; margin-top:-3%; margin-left:30%; margin-bottom:10%;'/>";
 					html += "<h3 style='font-family: arial; margin-left:0%; color:skyblue;'>Music :</h3>";
 					
 					if(results.length == 0)
@@ -154,9 +146,8 @@
 	<!--input type="text" id="search-video" title="Enter Search Keyword" />
 	<input type="button" value="Submit" onclick="performVideo();" /-->
 	
-	<div id="vid" style="margin-left:200px;width:75%;border:1px solid;border-radious:5px;"></div>
-	<h3 style="margin-left:10%;color:#999;margin-top:-26%">share<br/>&nbsp this</h3>
-	<a href="#"><div id="social3" class="social" style="margin-left:5%;margin-top:3%;margin-bottom:36px;"></div></a>
+	<div id="vid" style="margin-top:100px;margin-left:200px;width:75%;border:1px solid;border-radious:5px;"></div>
+	
 <!--div class="vzaar_media_player" id="vid">
 <object data="https://view.vzaar.com/1975731/flashplayer" height="252" id="vzvd-1975731" type="application/x-shockwave-flash" width="448">
 <param name="flashvars" value="border=none" />
@@ -172,27 +163,9 @@
 		<input type="text" id="search-keyword" title="Enter Search Keyword" />
 		<br />
 		<input type="button" value="Perform iTunes Search" onclick="performSearch();" /-->
-		<div id="songdetails"></div>
-		<div id="itunes-results" style="margin-left:660px;margin-top:-10%; font-family: Arial, Helvetica, Geneva, sans-serif;">
+		<div id="songdetails">
+		<div id="itunes-results" style="margin-left:660px;margin-top:-32%; font-family: sans-serif;">
 		</div>
-		
-    
-    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="social-buttons-share.js"></script>
-    <script>
-      $(function() {
-       
-        $("#social3").socialButtonsShare({
-		
-          socialNetworks: ["facebook", "twitter", "googleplus"],
-          url: "http://ramudu-63.github.io/itunes/?videoId="+videoId+"&song="+songName,
-          text: "My Musaic",
-          verticalAlign: true
-        });
-
-        
-      })
-    </script>
-  </body>
+	   <!--/div-->
+	</body>
 </html>
