@@ -10,7 +10,7 @@
       socialNetworks: ["facebook", "twitter", "googleplus"],
       url: "",
       text: "",
-      verticalAlign: true
+      verticalAlign: false
     };
     $.extend(that.options, options);
     if (that.options.url==="" && $("link[rel=canonical]").length) {
@@ -27,21 +27,21 @@
     that.socialNetworks = {
       facebook: {
         title: "Share on Facebook",
-        cssclass: "social-facebook",
-		shareurl: "https://www.facebook.com/sharer/sharer.php?u=" + that.options.url,
+        cssclass: "fa fa-facebook",
+        shareurl: "https://www.facebook.com/sharer/sharer.php?u=" + that.options.url,
         height: 600,
         width: 600
       },
       twitter: {
         title: "Share on Twitter",
-        cssclass: "social-twitter",
+        cssclass: "fa fa-twitter ",
         shareurl: "http://twitter.com/share?text=" + that.options.text + "&url=" + that.options.url,
         height: 600,
         width: 600
       },
       googleplus: {
         title: "Share on Google+",
-        cssclass: "social-googleplus",
+        cssclass: "fa fa-google-plus",
         shareurl: "https://plus.google.com/share?url=" + that.options.url,
         height: 600,
         width: 600
